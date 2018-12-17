@@ -54,7 +54,7 @@ class SluggableBehavior extends Behavior
      */
     public function afterSave(Event $event, Entity $entity, $options)
     {
-        $config = $this->config();                                  # load the config built by the instantiated behavior
+        $config = $this->getConfig();                                  # load the config built by the instantiated behavior
 
         $original = $entity->get($config['field']);                 # manually store $original - wasn't working for some reason otherwise
         $entity->set($config['field'], $this->_generateSlug($entity)); # set the slug
