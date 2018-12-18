@@ -35,7 +35,7 @@ class SluggableBehavior extends Behavior
      */
     private function _generateSlug(Entity $entity)
     {
-        $config = $this->config();                                  # load the config built by the instantiated behavior
+        $config = $this->getConfig();                                  # load the config built by the instantiated behavior
 
         if ($entity->get($config['field']) && !$config['overwrite']) :    # if already set, and !overwrite
             return $entity->get($config['field']);                  # return existing
@@ -74,7 +74,7 @@ class SluggableBehavior extends Behavior
      */
     public function findSlugged(Query $query, array $options)
     {
-        $config = $this->config();
+        $config = $this->getConfig();
         return $query->where([$this->_table->alias().'.'.$config['field'] => $options['slug']]);
     }
 
@@ -86,7 +86,7 @@ class SluggableBehavior extends Behavior
      */
     public function findSluggedList(Query $query, array $options)
     {
-        $config = $this->config();
+        $config = $this->getConfig();
         return $query->find('list', ['keyField'=>$config['field']]);
     }
 }
