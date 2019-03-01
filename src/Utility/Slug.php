@@ -2,7 +2,6 @@
 
 namespace Sluggable\Utility;
 
-use Cake\Utility\Inflector;
 use Cake\Utility\Text;
 
 class Slug
@@ -21,7 +20,7 @@ class Slug
 
         # build the slug
         $value = Text::insert($pattern, $data);           # inject data into pattern (if applicable)
-        $value = Inflector::slug($value, $replacement);   # slug it
+        $value = Text::slug($value, $replacement);   # slug it
         $value = strtolower($value);                      # convert to lowercase
 
         return $value;
