@@ -60,7 +60,7 @@ class SluggableBehavior extends Behavior
         $entity->set($config['field'], $this->_generateSlug($entity)); # set the slug
 
         # if the slug is actually different than before - save it
-        if ($entity->dirty() && ($original != $entity->get($config['field']))) :
+        if ($entity->isDirty() && ($original != $entity->get($config['field']))) :
             $this->_table->save($entity);
         endif;
 

@@ -1,9 +1,9 @@
 {
-    "name": "cwbit/cakephp-sluggable",
+    "name": "simtecsystem/cakephp-sluggable",
     "description" : "Plugin for CakePHP 3.x that enables automatic, configurable slugging of database fields",
     "type" : "cakephp-plugin",
     "keywords": ["cakephp", "plugin", "sluggable", "slug"],
-    "homepage": "https://github.com/cwbit/cakephp-sluggable",
+    "homepage": "https://github.com/simtecsystem/cakephp-sluggable",
     "license": "MIT",
     "authors": [
         {
@@ -17,7 +17,7 @@
         "cakephp/cakephp": "~3"
     },
     "support": {
-        "source": "https://github.com/cwbit/cakephp-sluggable"
+        "source": "https://github.com/simtecsystem/cakephp-sluggable"
     },
     "autoload": {
         "psr-4": {
