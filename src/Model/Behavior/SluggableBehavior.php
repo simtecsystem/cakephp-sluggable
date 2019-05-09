@@ -35,6 +35,7 @@ class SluggableBehavior extends Behavior
      */
     private function _generateSlug(Entity $entity)
     {
+
         $config = $this->getConfig();                                  # load the config built by the instantiated behavior
 
         if ($entity->get($config['field']) && !$config['overwrite']) :    # if already set, and !overwrite
@@ -42,6 +43,7 @@ class SluggableBehavior extends Behavior
         endif;
 
         $value = Slug::generate($config['pattern'], $entity, $config['replacement']);
+
 
         return $value;                                              # return the slug
     }
@@ -57,6 +59,22 @@ class SluggableBehavior extends Behavior
         $config = $this->getConfig();                                  # load the config built by the instantiated behavior
 
         $original = $entity->get($config['field']);                 # manually store $original - wasn't working for some reason otherwise
+
+
+        $usedTraits = class_uses($entity);
+
+        if(in_array('TecBase\Revisionable\RevisionEntityTrait', $usedTraits)) {
+            // if old revision, skip change of slug
+            $entity->set($config['field'], $this->_generateSlug($entity)); # set the slug
+
+            # if the slug is actually different than before - save it
+            if ($entity->isDirty() && ($original != $entity->get($config['field']))) :
+                $this->_table->hardSave($entity);
+            endif;
+            return true;
+        }
+
+
         $entity->set($config['field'], $this->_generateSlug($entity)); # set the slug
 
         # if the slug is actually different than before - save it
